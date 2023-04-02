@@ -10,7 +10,10 @@ ui <- dashboardPage(
         tags$style(HTML(".skin-blue .main-header .sidebar-toggle {display: none;}"))
         ),
         sidebarMenu(id='tab',            
-            menuItem("Home Page", tabName = "home", icon = icon("list")),
+            menuItem("Overview", tabName = "overview", icon = icon("list")),
+            menuItem("MultiQC", tabName = "qc", icon = icon("list")),
+            menuItem("Taxonomic Profile", tabName = "taxonomic", icon = icon("list")),
+            menuItem("About", tabName = "about", icon = icon("list")),
             menuItem("scRNAseq Analyzer", tabName = "input", icon = icon("edit")),
             conditionalPanel(condition = "input.tab == 'input'",
                 div(
@@ -28,19 +31,65 @@ ui <- dashboardPage(
     
     dashboardBody(
         tabItems(
-                tabItem(tabName = "input", # tabItem refers to tab in sidebar (not main panel)
-                tabsetPanel(id = 'main_tabs',
-                    tabPanel("Instructions",
-                            includeMarkdown("./markdown/instructions.md")
-                            )
+            tabItem(tabName = "overview",
+                    fluidRow(
+                        box(
+                            title = "Overview",
+                            solidHeader = TRUE,
+                            width = 12,
+                            status = "primary",
+                            collapsible = TRUE,
+                            collapsed = FALSE,
+                            footer = NULL,
+                            plotOutput("overview", height = "400px")
                         )
-                    ),
-                tabItem(tabName = "home",
-                tags$h1(HTML("<u>Welcome to The scRNAseq Suerat analysis RShiny app</u>")),
-                )
-                )
-            )         
-)
+                    )
+            ),
+            tabItem(tabName = "taxonomic",
+                    fluidRow(
+                        box(
+                            title = "Taxonomic Profile",
+                            solidHeader = TRUE,
+                            width = 12,
+                            status = "primary",
+                            collapsible = FALSE,
+                            collapsed = FALSE,
+                            footer = NULL,
+                            plotOutput("taxonomic", height = "400px")
+                        )
+                    )
+            ),
+            tabItem(tabName = "about",
+                    fluidRow(
+                        box(
+                            title = "About",
+                            solidHeader = TRUE,
+                            width = 12,
+                            status = "primary",
+                            collapsible = TRUE,
+                            collapsed = FALSE,
+                            footer = NULL,
+                            plotOutput("about", height = "400px")
+                        )
+                    )
+            ),
+            tabItem(tabName = "input",
+                    fluidRow(
+                        box(
+                            title = "scRNAseq Analyzer",
+                            solidHeader = TRUE,
+                            width = 12,
+                            status = "primary",
+                            collapsible = TRUE,
+                            collapsed = FALSE,
+                            footer = NULL,
+                            plotOutput("input", height = "400px")
+                        )
+                    )
+            )
+        )
+    )
+)         
         
 
 
