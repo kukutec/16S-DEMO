@@ -45,17 +45,10 @@ ui <- dashboardPage(
                         )
                     )
             ),
-            tabItem(tabName = "taxonomic",
-                    fluidRow(
-                        box(
-                            title = "Taxonomic Profile",
-                            solidHeader = TRUE,
-                            width = 12,
-                            status = "primary",
-                            collapsible = FALSE,
-                            collapsed = FALSE,
-                            footer = NULL,
-                            plotOutput("taxonomic", height = "400px")
+            tabItem(tabName = "qc",
+                    fluidPage(
+                      fileInput("html_file", "Upload HTML file"),
+                      htmlOutput("html_output")
                         )
                     )
             ),
